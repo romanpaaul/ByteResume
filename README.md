@@ -7,6 +7,11 @@ We want to create a tool that would generate a cool CV for a Software Developer.
 Q: "Cine v-a lucrat aici??" (Who worked here?)  
 A: Razvan Radoi, Paul Roman, Paul Sburlea
 
+Ensure the following tools are installed on your system ;) :
+  Node.js : https://nodejs.org/en
+  Git : https://git-scm.com
+  A package manager : npm -> see below the steps
+
 
 Steps to run the project:
   1) Clone the repo:
