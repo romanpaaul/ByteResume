@@ -1,0 +1,276 @@
+/* General */
+.home-container {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    transition: background 0.5s ease-in-out;
+}
+
+/* Navbar */
+.home-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2575fc;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #2575fc;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #1d5edb;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.auth-buttons button {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.auth-buttons .login-button {
+    background-color: white;
+    color: #2575fc;
+    border: 1px solid #2575fc;
+}
+
+.auth-buttons .login-button:hover {
+    background-color: #2575fc;
+    color: white;
+}
+
+.auth-buttons .signup-button {
+    background-color: #2575fc;
+    color: white;
+}
+
+.auth-buttons .signup-button:hover {
+    background-color: #1d5edb;
+}
+
+/* Hero Section */
+.home-header {
+    text-align: center;
+    margin-top: 100px;
+    padding: 50px;
+}
+
+.home-header h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.home-header p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+.cta-button {
+    padding: 15px 30px;
+    font-size: 1rem;
+    background-color: #2575fc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #1d5edb;
+}
+
+/* Features Section */
+.home-features {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 50px 0;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.feature {
+    width: 200px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.feature span {
+    font-size: 2rem;
+    color: #2575fc;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.feature p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Why ByteResume Section */
+.home-advantages {
+    text-align: center;
+    margin: 50px 0;
+    padding: 0 20px;
+}
+
+.home-advantages h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.advantages-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.advantage {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.advantage:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.advantage span {
+    font-size: 2rem;
+    color: #2575fc;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.advantage p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Steps Section */
+.home-steps {
+    text-align: center;
+    margin: 50px 0;
+    padding: 0 20px;
+}
+
+.home-steps h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.steps-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.step {
+    width: 220px;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.step img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.step h3 {
+    font-size: 1.2rem;
+    color: #2575fc;
+    margin-bottom: 10px;
+}
+
+.step p {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.step small {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Scroll to Top */
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #2575fc;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

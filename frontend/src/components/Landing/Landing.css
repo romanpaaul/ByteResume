@@ -1,0 +1,117 @@
+.landing {
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+.landing-header {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.landing-header h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.landing-header p {
+    font-size: 1.5rem;
+}
+
+.landing-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.landing-button:hover {
+    transform: scale(1.05);
+}
+
+.landing-guide {
+    padding: 50px;
+    text-align: center;
+}
+
+.landing-guide h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #2575fc;
+}
+
+.landing-guide p {
+    font-size: 1.2rem;
+}
+
+.landing-guide ol {
+    list-style: decimal;
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    color: inherit;
+}
+
+.landing-reviews {
+    padding: 50px;
+    text-align: center;
+}
+
+.landing-reviews h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #2575fc;
+}
+
+.reviews-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.review-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    text-align: center;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.review-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+
+.review-message {
+    font-size: 1rem;
+    margin: 10px 0;
+    color: #555;
+}
+
+.review-name {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+}
