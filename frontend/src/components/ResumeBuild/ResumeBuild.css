@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+
+/* Header-ul principal */
+.input-header {
+    font-weight: bold;
+    text-align: center;
+    font-size: 2.5rem; /* Mărită font-size pentru impact vizual */
+    margin-top: 50px;
+    color: #2575fc; /* Schimbare în culoare neutră */
+    font-family: 'Courgette', cursive; /* Stil artistic */
+}
+ 
+/* Containerul principal */
+.input-main {
+    margin: 0px 5vw 50px;
+    padding: 20px; /* Adăugat padding pentru spațiere */
+    border: 1px solid #2575fc; /* Culoare neutră */
+    border-radius: 10px; /* Border mai rotunjit */
+    background-color: #f9f9f9; /* Adăugat fundal deschis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adăugat umbră */
+}
+
+/* Formularul */
+.input-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 80%; /* Scăzută lățimea pentru responsivitate */
+    margin: 30px auto;
+    gap: 20px; /* Spațiu mărit între câmpuri */
+}
+
+.input-form > div {
+    grid-column: 1/3; /* Ocupă două coloane */
+    text-align: center;
+    font-weight: bold;
+    color: #2575fc;
+}
+
+/* Inputurile */
+.input-form input {
+    border: 1px solid #2575fc;
+    border-radius: 5px;
+    padding: 12px; /* Padding mai generos */
+    outline-color: #2575fc;
+    font-size: 15px; /* Font mai mare pentru lizibilitate */
+    box-sizing: border-box;
+}
+
+/* Placeholder */
+input::placeholder {
+    font-size: 14px; /* Creștere ușoară */
+    color: #aaaaaa; /* Culoare gri pentru placeholder */
+}
+
+/* Etichetele */
+.input-head {
+    margin-top: 30px;
+    text-align: left;
+    color: #2575fc;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.input-btn {
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #2575fc;
+    color: white;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px; /* Dimensiune mai generoasă */
+    font-weight: bold;
+    width: fit-content; /* Dimensiunea butonului să fie în funcție de conținut */
+}
+
+
+.input-btn:hover {
+    background-color: #6a6a6a; /* Culoare mai deschisă la hover */
+    color: #ffffff;
+}
+
+/* Mesaje de eroare */
+.input-err {
+    color: #d9534f; /* Roșu pentru alertă */
+    font-size: 13px;
+    text-align: center;
+}
+
+/* Anularea spinnerelor de pe inputurile numerice */
+.input-mob {
+    -moz-appearance: textfield;
+    appearance: none;
+}
+
+.input-mob::-webkit-outer-spin-button,
+.input-mob::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Containere adiționale */
+.add-input-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Spațiere între elemente */
+    gap: 10px;
+}
+
+.add-input-icon {
+    font-size: 22px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    color: #2575fc;
+}
+
+.add-input-icon:hover {
+    transform: scale(1.2); /* Animare la hover */
+}
+
+/* Inputuri de interes */
+.input-interest {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px; /* Mai mult spațiu între câmpuri */
+}
+
+/* Input remove icon */
+.input-remove-icon {
+    color: #2575fc;
+    font-size: 18px;
+}
+
+/* Reprezentare grafică */
+.form-img > input {
+    border: 1px solid #2575fc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    color: #2575fc;
+}
+
+/* Hint-uri */
+.hint {
+    color: white;
+    font-weight: 400;
+    font-size: 11px;
+    padding: 6px;
+    background-color: #2575fc;
+    border-radius: 5px;
+}
+
+/* Responsivitate */
+@media screen and (max-width: 800px) {
+    .input-form {
+        grid-template-columns: 1fr; /* Un singur rând */
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .input-main {
+        margin: 0 5vw;
+    }
+    .input-form {
+        width: 100%;
+    }
+}

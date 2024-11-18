@@ -1,38 +1,82 @@
-.App {
-  text-align: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+:root {
+    --dark: #100720;
+    --light: #2575fc ;
   }
+
+
+body{
+    margin: 0;
+    font-family: 'Comfortaa', cursive;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.link{
+    text-decoration: none;
+
 }
 
-.App-link {
-  color: #61dafb;
+::-webkit-scrollbar {
+    width: 14px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+::-webkit-scrollbar-thumb{
+    background-color:#2575fc;
+    border-radius: 7px;
+}
+::-webkit-scrollbar-thumb:hover{
+    background-color:#2575fc;
+}
+::-webkit-scrollbar-thumb:active{
+    background-color:#2575fc;
+}
+
+
+::-webkit-scrollbar-track {
+    background-color: #d6caec;
+}
+
+.print-btn{
+    background-color: var(--light);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}  
+.print-btn:active{
+    background-color:#2575fc;
+}
+
+.loader{
+    margin: 30vh auto 0;
+}
+.loader-hint{
+    color: var(--light);
+    text-align: center;
+}
+
+.noprint{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+}
+.anchor-link:hover{
+    font-weight: bold;
+}
+
+
+@media print {
+    body{
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+    @page {
+        size: auto;
+        margin: 0mm;  
+    }
+    .noprint{
+        display: none;
+    }
 }

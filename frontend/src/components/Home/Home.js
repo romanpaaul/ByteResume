@@ -57,7 +57,12 @@ const Home = () => {
       <header className="home-header">
         <h1>Free Online CV Maker</h1>
         <p>Create your professional resume effortlessly.</p>
-        <button className="cta-button">Create a CV</button>
+        <button
+          className="cta-button"
+          onClick={() => navigate('/resumebuild')} // Navigate to Questionnaire page
+        >
+          Create a CV
+        </button>
       </header>
 
       {/* Features Section */}

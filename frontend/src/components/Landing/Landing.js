@@ -75,21 +75,22 @@ const Landing = () => {
             {/* Header Section */}
             <section
                 className="landing-header"
-                style={{ color: getTextColor() }}
+                style={{ color: 'white' }} // Text permanent alb
             >
                 <h1>Welcome to ByteResume</h1>
                 <p>Your ultimate tool for creating professional resumes with ease.</p>
                 <button
                     className="landing-button"
                     style={{
-                        color: scrollY < 400 ? '#2575fc' : 'white',
-                        backgroundColor: scrollY < 400 ? 'white' : '#2575fc',
+                        color: '#2575fc', // Textul butonului
+                        backgroundColor: 'white', // Fundal alb
                     }}
-                    onClick={() => navigate('/home')} // Navigare către pagina Home
+                    onClick={() => navigate('/home')}
                 >
                     Get Started
                 </button>
-            </section>
+             </section>
+
 
             {/* Guide Section */}
             <section

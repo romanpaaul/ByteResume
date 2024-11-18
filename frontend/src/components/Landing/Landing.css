@@ -5,6 +5,7 @@
 }
 
 .landing-header {
+    color: white;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -15,11 +16,13 @@
 }
 
 .landing-header h1 {
+    color: white;
     font-size: 3rem;
     margin-bottom: 10px;
 }
 
 .landing-header p {
+    color: white;
     font-size: 1.5rem;
 }
 
