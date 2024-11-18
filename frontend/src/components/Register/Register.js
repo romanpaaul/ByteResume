@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom'; // Importă useNavigate
 import './Register.css';
 
 const Register = () => {
@@ -12,6 +13,8 @@ const Register = () => {
     jobTitle: '',
   });
 
+  const navigate = useNavigate(); // Initializează useNavigate
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -20,17 +23,44 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (formData.password !== formData.confirmPassword) {
       alert('Passwords do not match!');
       return;
     }
-
-    console.log('Registration Successful:', formData);
-    // Handle registration logic here (e.g., send data to the server)
+  
+    try {
+      const response = await fetch('http://localhost:5000/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        alert('Registration successful!');
+        setFormData({
+          firstName: '',
+          lastName: '',
+          username: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+          jobTitle: '',
+        });
+        navigate('/login'); // Redirecționează la pagina de login
+      } else {
+        alert('Registration failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again later.');
+    }
   };
+  
 
   return (
     <div className="register-container">
