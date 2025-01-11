@@ -30,9 +30,19 @@ Steps to run the project:
   4) Run the Frontend:
      - cd frontend
      - npm start
+    
+// For DB:
+  Users are added in mongodb database after register
+  run in backend director:
+  - npm install mongodb
+  - npm install mongoose
+  install MongoDB Community Server:
+  https://www.mongodb.com/try/download/community
+    
 
 // Additional notes:
   - If you see warnings when using git add . -> like LF will be replaced by CRLF, run the following command: -> git config --global core.autocrlf true
   - Then re-add the files: -> git add --renormalize .
+
 
       
