@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./ResumeBuild.css";
+import { useNavigate } from "react-router-dom";
 
 const ResumeBuild = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ const ResumeBuild = () => {
       city: "",
       country: "",
       professionalTitle: "", 
+      profileImage: "", // Adăugăm un câmp pentru imagine
     },
     education: [{ degree: "", university: "", yearFrom: "", yearTo: "" }],
     workExperience: [
@@ -19,7 +21,10 @@ const ResumeBuild = () => {
     projects: [
       { projectName: "", technologies: "", description: "", link: "" },
     ],
+    languages: [{ language: "", stars: 1 }], // Adăugăm secțiunea de limbi
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e, section, index, field) => {
     if (typeof index === "number") {
@@ -49,8 +54,22 @@ const ResumeBuild = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitted Data:", formData);
+    console.log("Navigating with data:", formData); // Verifică datele trimise
+    navigate("/preview", { state: { formData } });
   };
+
+  const handlePresentToggle = (section, index) => {
+    const updatedSection = [...formData[section]];
+    updatedSection[index].isPresent = !updatedSection[index].isPresent;
+    if (updatedSection[index].isPresent) {
+      updatedSection[index].yearTo = "Present";
+    } else {
+      updatedSection[index].yearTo = "";
+    }
+    setFormData({ ...formData, [section]: updatedSection });
+  };
+
+  
 
   return (
     <div className="input-main">
@@ -90,12 +109,22 @@ const ResumeBuild = () => {
               onChange={(e) => handleChange(e, "education", index, "yearFrom")}
               placeholder="From (Year)"
             />
-            <input
-              type="text"
-              value={edu.yearTo}
-              onChange={(e) => handleChange(e, "education", index, "yearTo")}
-              placeholder="To (Year)"
-            />
+            {!edu.isPresent && (
+              <input
+                type="text"
+                value={edu.yearTo}
+                onChange={(e) => handleChange(e, "education", index, "yearTo")}
+                placeholder="To (Year)"
+              />
+            )}
+            <label>
+              <input
+                type="checkbox"
+                checked={edu.isPresent}
+                onChange={() => handlePresentToggle("education", index)}
+              />
+              Present
+            </label>
             {index > 0 && (
               <button
                 type="button"
@@ -108,10 +137,7 @@ const ResumeBuild = () => {
           </div>
         ))}
         <div className="add-input-block">
-          <div
-            className="add-input-icon"
-            onClick={() => handleAddField("education")}
-          >
+          <div className="add-input-icon" onClick={() => handleAddField("education")}>
             +
           </div>
           <div>Add Education</div>
@@ -139,15 +165,28 @@ const ResumeBuild = () => {
               onChange={(e) => handleChange(e, "workExperience", index, "yearFrom")}
               placeholder="From (Year)"
             />
-            <input
-              type="text"
-              value={exp.yearTo}
-              onChange={(e) => handleChange(e, "workExperience", index, "yearTo")}
-              placeholder="To (Year)"
-            />
+            {!exp.isPresent && (
+              <input
+                type="text"
+                value={exp.yearTo}
+                onChange={(e) => handleChange(e, "workExperience", index, "yearTo")}
+                placeholder="To (Year)"
+              />
+            )}
+            <label>
+              <input
+                type="checkbox"
+                checked={exp.isPresent}
+                onChange={() => handlePresentToggle("workExperience", index)}
+              />
+              Present
+            </label>
             <textarea
+              className="custom-textarea"
               value={exp.description}
-              onChange={(e) => handleChange(e, "workExperience", index, "description")}
+              onChange={(e) =>
+                handleChange(e, "workExperience", index, "description")
+              }
               placeholder="Description"
             />
             {index > 0 && (
@@ -162,10 +201,7 @@ const ResumeBuild = () => {
           </div>
         ))}
         <div className="add-input-block">
-          <div
-            className="add-input-icon"
-            onClick={() => handleAddField("workExperience")}
-          >
+          <div className="add-input-icon" onClick={() => handleAddField("workExperience")}>
             +
           </div>
           <div>Add Work Experience</div>
@@ -181,11 +217,14 @@ const ResumeBuild = () => {
               onChange={(e) => handleChange(e, "skills", index, "skillName")}
               placeholder="Skill Name"
             />
+            <label>Proficiency (1-5):</label>
             <input
-              type="text"
-              value={skill.proficiency}
-              onChange={(e) => handleChange(e, "skills", index, "proficiency")}
-              placeholder="Proficiency"
+              type="number"
+              min="1"
+              max="5"
+              value={skill.stars}
+              onChange={(e) => handleChange(e, "skills", index, "stars")}
+              placeholder="Stars (1-5)"
             />
             {index > 0 && (
               <button
@@ -225,8 +264,11 @@ const ResumeBuild = () => {
               placeholder="Technologies"
             />
             <textarea
+              className="custom-textarea"
               value={project.description}
-              onChange={(e) => handleChange(e, "projects", index, "description")}
+              onChange={(e) =>
+                handleChange(e, "projects", index, "description")
+              }
               placeholder="Description"
             />
             <input
@@ -254,6 +296,46 @@ const ResumeBuild = () => {
             +
           </div>
           <div>Add Project</div>
+        </div>
+
+        {/* Languages */}
+        <div className="input-head">Languages</div>
+        {formData.languages.map((lang, index) => (
+          <div key={index}>
+            <input
+              type="text"
+              value={lang.language}
+              onChange={(e) => handleChange(e, "languages", index, "language")}
+              placeholder="Language"
+            />
+            <label>Proficiency (1-5):</label>
+            <input
+              type="number"
+              min="1"
+              max="5"
+              value={lang.stars}
+              onChange={(e) => handleChange(e, "languages", index, "stars")}
+              placeholder="Stars (1-5)"
+            />
+            {index > 0 && (
+              <button
+                type="button"
+                onClick={() => handleRemoveField("languages", index)}
+                className="input-btn"
+              >
+                Remove
+              </button>
+            )}
+          </div>
+        ))}
+        <div className="add-input-block">
+          <div
+            className="add-input-icon"
+            onClick={() => handleAddField("languages")}
+          >
+            +
+          </div>
+          <div>Add Language</div>
         </div>
 
         {/* Submit */}

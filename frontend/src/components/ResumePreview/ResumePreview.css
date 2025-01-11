@@ -1,0 +1,157 @@
+.resume-container {
+    display: flex;
+    font-family: Arial, sans-serif;
+    color: #333;
+    max-width: 1000px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebar {
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .profile-picture img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+  
+  .personal-details, .interests, .languages {
+    margin-bottom: 20px;
+  }
+  
+  .personal-details h2, .interests h2, .languages h2 {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #34495e;
+    padding-bottom: 5px;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .header h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+  }
+  
+  .header h3 {
+    font-size: 1.5rem;
+    color: #7f8c8d;
+  }
+  
+  .work-experience, .education, .skills {
+    margin-bottom: 20px;
+  }
+  
+  .work-experience h2, .education h2, .skills h2 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 10px;
+  }
+  
+  .work-entry, .education-entry {
+    margin-bottom: 10px;
+  }
+  
+  .work-entry h3, .education-entry h3 {
+    font-size: 1.2rem;
+    margin: 5px 0;
+  }
+  
+  .skills ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .skills li {
+    margin-bottom: 5px;
+  }
+
+  /* General container for entries */
+.project-entry, .work-entry, .education-entry {
+    margin-bottom: 15px;
+    border-left: 4px solid #2575fc;
+    padding-left: 15px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    padding: 10px;
+  }
+  
+  /* Title for sections like project name or job title */
+  .project-entry h3, .work-entry h3, .education-entry h3 {
+    font-size: 1.2rem;
+    color: #34495e;
+    margin-bottom: 5px;
+  }
+  
+  /* Styled paragraphs inside entries */
+  .project-entry p, .work-entry p, .education-entry p {
+    margin: 8px 0;
+    color: #555;
+    font-size: 0.95rem;
+  }
+  
+  /* Specific styles for "Technologies" field */
+  .project-entry p:nth-of-type(1) {
+    color: #2c3e50;
+    font-weight: bold;
+    font-size: 1rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+  }
+  
+  /* Specific styles for "Description" field */
+  .project-entry p:nth-of-type(2) {
+    color: #7f8c8d;
+    margin-top: 5px;
+    font-style: italic;
+  }
+  
+  /* Work experience - Company name */
+  .work-entry p:nth-of-type(1) {
+    color: #2c3e50;
+    font-weight: bold;
+  }
+  
+  /* Work experience - Date range */
+  .work-entry p:nth-of-type(2) {
+    color: #3498db;
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+  
+  /* Work experience - Description */
+  .work-entry p:nth-of-type(3) {
+    color: #7f8c8d;
+    margin-top: 5px;
+    font-style: normal;
+  }
+  
+  /* Space between sections */
+  section h2 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+  }
+  
+  

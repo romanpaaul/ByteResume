@@ -5,6 +5,7 @@ import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import ResumeBuild from './components/ResumeBuild/ResumeBuild';
+import ResumePreview from "./components/ResumePreview/ResumePreview";
 import About from "./components/About/About";
 import './App.css'
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/resumebuild" element={<ResumeBuild />} />
         <Route path='/about' element={<><About /></>} />
+        <Route path="/preview" element={<ResumePreview />} />
       </Routes>
     </Router>
   );
