@@ -1,0 +1,90 @@
+.user-profile-container {
+  padding: 20px;
+  background: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.entry {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+input {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 200px;
+}
+
+button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.remove-entry {
+  color: red;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.add-entry {
+  margin-top: 10px;
+  background-color: #28a745;
+}
+
+.add-entry:hover {
+  background-color: #218838;
+}
+
+.entry {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.entry-header {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.entry-header input,
+textarea {
+  flex: 1;
+}
+
+textarea {
+  margin-top: 8px;
+}
+
+.remove-entry {
+  color: red;
+  cursor: pointer;
+  font-weight: bold;
+}

@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Home.css';
+import { UserContext } from '../context/UserContext'; // Assuming user context is used for logged-in user data
 
 const Home = () => {
   const [scrollY, setScrollY] = useState(0);
-  const navigate = useNavigate(); // Add useNavigate hook for navigation
+  const navigate = useNavigate();
+  const { user, logout } = useContext(UserContext); // Access user and logout function from UserContext
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,6 +31,11 @@ const Home = () => {
     }
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
     <div
       className="home-container"
@@ -46,10 +53,39 @@ const Home = () => {
           <Link to="/contact">Contact</Link>
         </div>
         <div className="auth-buttons">
-          <button className="login-button" onClick={() => navigate('/login')}>
-            Log In
-          </button>
-          <button className="signup-button" onClick={() => navigate('/register')}>Sign Up</button>
+          {user ? (
+            <>
+              <span
+                className="user-profile-link"
+                onClick={() => navigate('/profile')}
+                style={{
+                  cursor: 'pointer',
+                  marginRight: '1rem',
+                  color: '#007bff',
+                }}
+              >
+                {user.username}'s Profile
+              </span>
+              <button className="logout-button" onClick={handleLogout}>
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                className="login-button"
+                onClick={() => navigate('/login')}
+              >
+                Log In
+              </button>
+              <button
+                className="signup-button"
+                onClick={() => navigate('/register')}
+              >
+                Sign Up
+              </button>
+            </>
+          )}
         </div>
       </nav>
 
@@ -59,7 +95,7 @@ const Home = () => {
         <p>Create your professional resume effortlessly.</p>
         <button
           className="cta-button"
-          onClick={() => navigate('/resumebuild')} // Navigate to Questionnaire page
+          onClick={() => navigate('/resumebuild')}
         >
           Create a CV
         </button>
