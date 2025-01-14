@@ -26,6 +26,11 @@ const Login = () => {
       if (response.ok) {
         alert('Login successful! Welcome, ' + data.user.username);
         setUser(data.user);
+
+        // Salvează userId în localStorage
+        localStorage.setItem('userId', data.user.id);
+
+        // Navighează la pagina "home"
         navigate('/home');
       } else {
         alert(data.message);

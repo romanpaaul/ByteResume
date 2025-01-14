@@ -113,11 +113,11 @@ const ResumePreview = () => {
             )}
           </section>
 
-          {formData.workExperience.length > 0 &&
-            formData.workExperience.some((exp) => exp.jobTitle) && (
+          {formData.experience.length > 0 &&
+            formData.experience.some((exp) => exp.jobTitle) && (
               <section className="work-experience">
                 <h2>Work Experience</h2>
-                {sortChronologically(formData.workExperience).map(
+                {sortChronologically(formData.experience).map(
                   (exp, index) => (
                     <div key={index} className="work-entry">
                       <h3>{exp.jobTitle}</h3>

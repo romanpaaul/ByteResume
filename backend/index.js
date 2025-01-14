@@ -75,11 +75,198 @@ app.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid password' });
     }
 
-    res.status(200).json({ message: 'Login successful', user: { email: user.email, username: user.username } });
+    res.status(200).json({
+      message: 'Login successful',
+      user: { email: user.email, username: user.username, id: user._id },
+    });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error });
   }
 });
+
+
+
+
+// Profile Schema and Model
+const profileSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Referință la utilizator
+  personalDetails: {
+    fullName: String,
+    email: String,
+    phone: String,
+  },
+  education: [
+    {
+      degree: String,
+      institution: String,
+      startDate: Date,
+      endDate: Date,
+      description: String,
+      isPresent: Boolean,
+    },
+  ],
+  experience: [
+    {
+      jobTitle: String,
+      company: String,
+      startDate: Date,
+      endDate: Date,
+      description: String,
+      isPresent: Boolean,
+    },
+  ],
+  projects: [
+    {
+      projectName: String,
+      technologies: String,
+      startDate: Date,
+      endDate: Date,
+      description: String,
+    },
+  ],
+});
+
+const Profile = mongoose.model('Profile', profileSchema);
+
+
+// Save Profile endpoint
+app.post('/saveProfile', async (req, res) => {
+  const { userId, personalDetails, education, experience, projects } = req.body;
+
+  try {
+    const profile = await Profile.findOneAndUpdate(
+      { userId },
+      { personalDetails, education, experience, projects },
+      { upsert: true, new: true }
+    );
+
+    res.status(200).json({ message: 'Profile saved successfully!', profile });
+  } catch (error) {
+    console.error('Error saving profile:', error);
+    res.status(500).json({ message: 'Error saving profile', error });
+  }
+});
+
+
+
+// Endpoint pentru obținerea profilului utilizatorului
+app.get('/getProfile/:userId', async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const profile = await Profile.findOne({ userId });
+    if (profile) {
+      res.status(200).json(profile);
+    } else {
+      res.status(404).json({ message: 'Profile not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching profile' });
+  }
+});
+
+
+const resumeSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  personalDetails: {
+    fullName: String,
+    email: String,
+    phone: String,
+    city: String,
+    country: String,
+    professionalTitle: String,
+    profileImage: String,
+  },
+  education: [
+    {
+      degree: String,
+      institution: String,
+      startDate: Date,
+      endDate: Date,
+      description: String,
+      isPresent: Boolean,
+    },
+  ],
+  experience: [ // Asigură-te că acest câmp există și este definit corect
+    {
+      jobTitle: String,
+      company: String,
+      startDate: Date,
+      endDate: Date,
+      description: String,
+      isPresent: Boolean,
+    },
+  ],
+  skills: [
+    {
+      skillName: String,
+      stars: Number,
+    },
+  ],
+  projects: [
+    {
+      projectName: String,
+      technologies: String,
+      description: String,
+      link: String,
+    },
+  ],
+  languages: [
+    {
+      language: String,
+      stars: Number,
+    },
+  ],
+  createdAt: { type: Date, default: Date.now }, // Adaugă o dată de creare pentru a păstra ordinea
+
+});
+
+const Resume = mongoose.model('Resume', resumeSchema);
+
+
+
+app.post('/saveResume', async (req, res) => {
+  const { userId, ...resumeData } = req.body;
+
+  if (!userId) {
+    return res.status(400).json({ message: 'User ID is required' });
+  }
+
+  try {
+    const newResume = new Resume({
+      userId,
+      ...resumeData,
+    });
+
+    await newResume.save(); // Salvează un nou CV
+    res.status(200).json({ message: 'Resume saved successfully', resume: newResume });
+  } catch (error) {
+    console.error('Error saving resume:', error);
+    res.status(500).json({ message: 'Error saving resume', error });
+  }
+});
+
+
+
+
+app.get('/getResumes/:userId', async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const resumes = await Resume.find({ userId }); // Obține toate CV-urile unui utilizator
+    if (resumes.length > 0) {
+      res.status(200).json(resumes);
+    } else {
+      res.status(404).json({ message: 'No resumes found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching resumes' });
+  }
+});
+
+
 
 // Start server
 app.listen(PORT, () => {

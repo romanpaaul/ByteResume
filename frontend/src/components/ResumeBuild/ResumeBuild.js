@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ResumeBuild.css";
 import { useNavigate } from "react-router-dom";
 
@@ -10,22 +10,85 @@ const ResumeBuild = () => {
       phone: "",
       city: "",
       country: "",
-      professionalTitle: "", 
-      profileImage: "", // Adăugăm un câmp pentru imagine
+      professionalTitle: "",
+      profileImage: "",
     },
     education: [{ degree: "", university: "", yearFrom: "", yearTo: "" }],
-    workExperience: [
+    experience: [
       { jobTitle: "", company: "", yearFrom: "", yearTo: "", description: "" },
     ],
     skills: [{ skillName: "", proficiency: "" }],
     projects: [
       { projectName: "", technologies: "", description: "", link: "" },
     ],
-    languages: [{ language: "", stars: 1 }], // Adăugăm secțiunea de limbi
+    languages: [{ language: "", stars: "" }],
   });
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const userId = localStorage.getItem("userId"); // Utilizează userId-ul salvat
+    if (userId) {
+      fetch(`http://localhost:5000/getProfile/${userId}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setFormData({
+            personalDetails: {
+              fullName: data.personalDetails?.fullName || "",
+              email: data.personalDetails?.email || "",
+              phone: data.personalDetails?.phone || "",
+              city: data.personalDetails?.city || "",
+              country: data.personalDetails?.country || "",
+              professionalTitle: data.personalDetails?.professionalTitle || "",
+              profileImage: data.personalDetails?.profileImage || "",
+            },
+            education: data.education?.map((edu) => ({
+              degree: edu.degree || "",
+              university: edu.institution || "",
+              yearFrom: edu.startDate ? new Date(edu.startDate).getFullYear() : "",
+              yearTo: edu.isPresent
+                ? "Present"
+                : edu.endDate
+                ? new Date(edu.endDate).getFullYear()
+                : "",
+              isPresent: edu.isPresent || false,
+            })) || [{ degree: "", university: "", yearFrom: "", yearTo: "", isPresent: false }],
+            experience: data.experience?.map((exp) => ({
+              jobTitle: exp.jobTitle || "",
+              company: exp.company || "",
+              yearFrom: exp.startDate ? new Date(exp.startDate).getFullYear() : "",
+              yearTo: exp.isPresent
+                ? "Present"
+                : exp.endDate
+                ? new Date(exp.endDate).getFullYear()
+                : "",
+              description: exp.description || "",
+              isPresent: exp.isPresent || false,
+            })) || [
+              {
+                jobTitle: "",
+                company: "",
+                yearFrom: "",
+                yearTo: "",
+                description: "",
+                isPresent: false,
+              },
+            ],
+            skills: data.skills || [{ skillName: "", stars: "" }],
+            projects: data.projects?.map((proj) => ({
+              projectName: proj.projectName || "",
+              technologies: proj.technologies || "",
+              description: proj.description || "",
+              link: proj.link || "",
+            })) || [{ projectName: "", technologies: "", description: "", link: "" }],
+            languages: data.languages || [{ language: "", stars: "" }],
+          });
+        })
+        .catch((error) => console.error("Error fetching profile data:", error));
+    }
+  }, []);
+  
+  
   const handleChange = (e, section, index, field) => {
     if (typeof index === "number") {
       const updatedSection = [...formData[section]];
@@ -52,23 +115,52 @@ const ResumeBuild = () => {
     setFormData({ ...formData, [section]: updatedSection });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Navigating with data:", formData); // Verifică datele trimise
-    navigate("/preview", { state: { formData } });
-  };
-
   const handlePresentToggle = (section, index) => {
     const updatedSection = [...formData[section]];
     updatedSection[index].isPresent = !updatedSection[index].isPresent;
-    if (updatedSection[index].isPresent) {
-      updatedSection[index].yearTo = "Present";
-    } else {
-      updatedSection[index].yearTo = "";
-    }
+    updatedSection[index].yearTo = updatedSection[index].isPresent
+      ? "Present"
+      : "";
     setFormData({ ...formData, [section]: updatedSection });
   };
 
+
+  const handleSave = async () => {
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      alert("User not logged in!");
+      return;
+    }
+  
+    console.log("Sending data:", { userId, ...formData }); // Log pentru verificare
+    
+    try {
+      const response = await fetch("http://localhost:5000/saveResume", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, ...formData }),
+      });
+  
+      const result = await response.json();
+      console.log("Server response:", result); // Log pentru răspunsul serverului
+  
+      if (response.ok) {
+        alert("Resume saved successfully!");
+      } else {
+        alert(`Error saving resume: ${result.message}`);
+      }
+    } catch (error) {
+      console.error("Error saving resume:", error);
+      alert("An unexpected error occurred!");
+    }
+  };
+  
+  
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/preview", { state: { formData } });
+  };
   
 
   return (
@@ -145,31 +237,31 @@ const ResumeBuild = () => {
 
         {/* Work Experience */}
         <div className="input-head">Work Experience</div>
-        {formData.workExperience.map((exp, index) => (
+        {formData.experience.map((exp, index) => (
           <div key={index}>
             <input
               type="text"
               value={exp.jobTitle}
-              onChange={(e) => handleChange(e, "workExperience", index, "jobTitle")}
+              onChange={(e) => handleChange(e, "experience", index, "jobTitle")}
               placeholder="Job Title"
             />
             <input
               type="text"
               value={exp.company}
-              onChange={(e) => handleChange(e, "workExperience", index, "company")}
+              onChange={(e) => handleChange(e, "experience", index, "company")}
               placeholder="Company"
             />
             <input
               type="text"
               value={exp.yearFrom}
-              onChange={(e) => handleChange(e, "workExperience", index, "yearFrom")}
+              onChange={(e) => handleChange(e, "experience", index, "yearFrom")}
               placeholder="From (Year)"
             />
             {!exp.isPresent && (
               <input
                 type="text"
                 value={exp.yearTo}
-                onChange={(e) => handleChange(e, "workExperience", index, "yearTo")}
+                onChange={(e) => handleChange(e, "experience", index, "yearTo")}
                 placeholder="To (Year)"
               />
             )}
@@ -177,7 +269,7 @@ const ResumeBuild = () => {
               <input
                 type="checkbox"
                 checked={exp.isPresent}
-                onChange={() => handlePresentToggle("workExperience", index)}
+                onChange={() => handlePresentToggle("experience", index)}
               />
               Present
             </label>
@@ -185,14 +277,14 @@ const ResumeBuild = () => {
               className="custom-textarea"
               value={exp.description}
               onChange={(e) =>
-                handleChange(e, "workExperience", index, "description")
+                handleChange(e, "experience", index, "description")
               }
               placeholder="Description"
             />
             {index > 0 && (
               <button
                 type="button"
-                onClick={() => handleRemoveField("workExperience", index)}
+                onClick={() => handleRemoveField("experience", index)}
                 className="input-btn"
               >
                 Remove
@@ -201,7 +293,7 @@ const ResumeBuild = () => {
           </div>
         ))}
         <div className="add-input-block">
-          <div className="add-input-icon" onClick={() => handleAddField("workExperience")}>
+          <div className="add-input-icon" onClick={() => handleAddField("experience")}>
             +
           </div>
           <div>Add Work Experience</div>
@@ -339,9 +431,13 @@ const ResumeBuild = () => {
         </div>
 
         {/* Submit */}
-        <button type="submit" className="input-btn">
-          Preview Resume
-        </button>
+        <button type="button" onClick={handleSave} className="input-btn">
+  Save
+</button>
+<button type="submit" className="input-btn">
+  Preview Resume
+</button>
+
       </form>
     </div>
   );
